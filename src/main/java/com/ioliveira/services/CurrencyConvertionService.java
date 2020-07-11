@@ -1,4 +1,4 @@
-package com.ioliveira;
+package com.ioliveira.services;
 
 import com.ioliveira.beans.CurrencyConvertion;
 import org.springframework.stereotype.Service;
