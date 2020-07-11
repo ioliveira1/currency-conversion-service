@@ -1,7 +1,7 @@
 package com.ioliveira.controllers;
 
-import com.ioliveira.CurrencyConvertionService;
 import com.ioliveira.beans.CurrencyConvertion;
+import com.ioliveira.services.CurrencyConvertionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,15 @@ public class CurrencyConvertionController {
             @PathVariable Long quantity) {
 
         return ResponseEntity.ok(service.convert(from, to, quantity));
+    }
+
+    @GetMapping(path = "/feign/{from}/{to}/{quantity}")
+    public ResponseEntity<CurrencyConvertion> currencyConvertionFeign(
+            @PathVariable String from,
+            @PathVariable String to,
+            @PathVariable Long quantity) {
+
+        return ResponseEntity.ok(service.convertFeign(from, to, quantity));
     }
 
 }
