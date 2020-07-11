@@ -4,3 +4,7 @@ spring:
 
 server:
   port: 8100
+
+currency-exchange-service:
+  ribbon:
+    listOfServers: localhost:8000,localhost:8001
