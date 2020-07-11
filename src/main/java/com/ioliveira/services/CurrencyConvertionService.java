@@ -1,6 +1,7 @@
 package com.ioliveira.services;
 
 import com.ioliveira.beans.CurrencyConvertion;
+import com.ioliveira.converters.BeanConverter;
 import com.ioliveira.feigns.CurrencyConvertionFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,30 +28,14 @@ public class CurrencyConvertionService {
                 .getBody();
 
         assert convertion != null;
-        return CurrencyConvertion.builder()
-                .id(convertion.getId())
-                .from(from)
-                .to(to)
-                .conversionMultiple(convertion.getConversionMultiple())
-                .quantity(quantity)
-                .totalAmount(new BigDecimal(quantity * convertion.getConversionMultiple()))
-                .port(convertion.getPort())
-                .build();
+        return BeanConverter.convertCurrency(convertion, from, to, quantity);
     }
 
     public CurrencyConvertion convertFeign(String from, String to, Long quantity) {
         CurrencyConvertion exchangeValue = feignClient.getExchangeValue(from, to);
 
         assert exchangeValue != null;
-        return CurrencyConvertion.builder()
-                .id(exchangeValue.getId())
-                .from(from)
-                .to(to)
-                .conversionMultiple(exchangeValue.getConversionMultiple())
-                .quantity(quantity)
-                .totalAmount(new BigDecimal(quantity * exchangeValue.getConversionMultiple()))
-                .port(exchangeValue.getPort())
-                .build();
+        return BeanConverter.convertCurrency(exchangeValue, from, to, quantity);
     }
 
 }
