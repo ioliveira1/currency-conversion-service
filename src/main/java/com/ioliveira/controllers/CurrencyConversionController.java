@@ -1,7 +1,7 @@
 package com.ioliveira.controllers;
 
-import com.ioliveira.beans.CurrencyConvertion;
-import com.ioliveira.services.CurrencyConvertionService;
+import com.ioliveira.beans.CurrencyConversion;
+import com.ioliveira.services.CurrencyConversionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/convertion")
-public class CurrencyConvertionController {
+@RequestMapping(path = "/conversion")
+public class CurrencyConversionController {
 
     @Autowired
-    private CurrencyConvertionService service;
+    private CurrencyConversionService service;
 
     @GetMapping(path = "/{from}/{to}/{quantity}")
-    public ResponseEntity<CurrencyConvertion> currencyConvertion(
+    public ResponseEntity<CurrencyConversion> currencyConversion(
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable Long quantity) {
@@ -26,7 +26,7 @@ public class CurrencyConvertionController {
     }
 
     @GetMapping(path = "/feign/{from}/{to}/{quantity}")
-    public ResponseEntity<CurrencyConvertion> currencyConvertionFeign(
+    public ResponseEntity<CurrencyConversion> currencyConversionFeign(
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable Long quantity) {
